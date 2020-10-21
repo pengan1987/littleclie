@@ -1,11 +1,19 @@
 <?php
-$rss_url = 'https://rsshub.ioiox.com/eastday/sh';
-$rss_content = file_get_contents($rss_url);
-file_put_contents('saestor://rss/eastday.xml', $rss_content);
 
-echo "eastday ok!";
-$zaobao_url = 'https://rsshub.ioiox.com/zaobao/realtime/china';
-$zaobao_content = file_get_contents($zaobao_url);
-file_put_contents('saestor://rss/zaobao.xml', $zaobao_content);
+$repos = array(
+    'eastday' => 'https://rsshub.ioiox.com/eastday/sh',
+    'zaobao' => 'https://rsshub.ioiox.com/zaobao/realtime/china',
+    'engadget' => 'https://rsshub.ioiox.com/engadget-cn',
+    'initium' => 'https://rsshub.ioiox.com/initium/latest/zh-hans'
+);
 
-echo "zaobao ok!";
+foreach ($repos as $name => $link) {
+    try {
+        $filename = 'saestor://rss/' . $name . '.xml';
+        $rss_content = file_get_contents($link);
+        file_put_contents($filename, $rss_content);
+        echo $filename, ' ok!', PHP_EOL;
+    } catch (Exception $e) {
+        echo $filename, $e->getMessage(), PHP_EOL;
+    }
+}
