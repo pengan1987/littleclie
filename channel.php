@@ -1,12 +1,12 @@
 <?php
-header('Content-Type: text/html; charset=gbk');
+require_once 'lib/Feed.php';
 
 if (!ini_get('date.timezone')) {
 	date_default_timezone_set('Asia/Shanghai');
 }
 ini_set('mbstring.substitute_character', "none");
 
-require_once 'lib/Feed.php';
+header('Content-Type: text/html; charset=gbk');
 
 if (isset($_GET['p'])) {
 	$page = intval($_GET['p']);
