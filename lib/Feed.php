@@ -147,7 +147,7 @@ class Feed
 			return (string) $xml;
 		}
 
-		$arr = [];
+		$arr = array();
 		foreach ($xml->children() as $tag => $child) {
 			if (count($xml->$tag) === 1) {
 				$arr[$tag] = $this->toArray($child);
@@ -170,7 +170,19 @@ class Feed
 	 */
 	private static function loadXml($url, $user, $pass)
 	{
-	    if ($data = @file_get_contents($url)) {
+		$e = self::$cacheExpire;
+		$cacheFile = self::$cacheDir . '/feed.' . md5(serialize(func_get_args())) . '.xml';
+
+		if (self::$cacheDir
+			&& (time() - @filemtime($cacheFile) <= (is_string($e) ? strtotime($e) - time() : $e))
+			&& $data = @file_get_contents($cacheFile)
+		) {
+			// ok
+		} elseif ($data = trim(self::httpRequest($url, $user, $pass))) {
+			if (self::$cacheDir) {
+				file_put_contents($cacheFile, $data);
+			}
+		} elseif (self::$cacheDir && $data = @file_get_contents($cacheFile)) {
 			// ok
 		} else {
 			throw new FeedException('Cannot load feed.');
@@ -213,12 +225,12 @@ class Feed
 		} else {
 			$context = null;
 			if ($user !== null && $pass !== null) {
-				$options = [
-					'http' => [
+				$options = array(
+					'http' => array(
 						'method' => 'GET',
 						'header' => 'Authorization: Basic ' . base64_encode($user . ':' . $pass) . "\r\n",
-					],
-				];
+					)
+				);
 				$context = stream_context_create($options);
 			}
 

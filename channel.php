@@ -1,5 +1,6 @@
 <?php
 require_once 'lib/Feed.php';
+require_once 'repos.php';
 
 if (!ini_get('date.timezone')) {
 	date_default_timezone_set('Asia/Shanghai');
@@ -16,10 +17,17 @@ if (isset($_GET['p'])) {
 
 if (isset($_GET['feed'])) {
 	$feed = $_GET['feed'];
-	$rssUrlInt = 'saestor://rss/' . $feed . '.xml';
+	$rssUrlInt = $repos[$feed];
+//	var_dump($rssUrlInt);
 } else {
-	$rssUrlInt = 'saestor://rss/eastday.xml';
+        $feed = "nothing";
+	$rssUrlInt = 'https://rsshub.app/eastday/sh';
 }
+
+Feed::$cacheDir = __DIR__ . '/tmp';
+Feed::$cacheExpire = '2 hours';
+
+//var_dump(Feed::$cacheDir);
 
 $rss = Feed::loadRss($rssUrlInt);
 $rssTitle = mb_convert_encoding($rss->title, 'gbk', 'UTF-8');
