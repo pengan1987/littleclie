@@ -44,6 +44,14 @@ $items = $rss->item;
 			font-family: 'Simsun', 'Times New Roman', Times, serif;
 			font-size: 12px;
 		}
+
+		img {
+			display: block;
+			max-width: 210px;
+			max-height: 210px;
+			width: auto;
+			height: auto;
+		}
 	</style>
 </head>
 
