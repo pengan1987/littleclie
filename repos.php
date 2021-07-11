@@ -1,18 +1,16 @@
 <?php
 
-// $repos = array(
-//     'eastday' => 'https://rsshub.app/eastday/sh',
-//     'zaobao' => 'https://rsshub.app/zaobao/realtime/china',
-//     'engadget' => 'https://rsshub.app/engadget-cn',
-//     'initium' => 'https://rsshub.app/initium/latest/zh-hans'
-// );
-
 $repos = array(
-    'eastday' => 'https://rsshub.ioiox.com/eastday/sh',
-    'zaobao' => 'https://rsshub.ioiox.com/zaobao/realtime/china',
-    'engadget' => 'https://rsshub.ioiox.com/engadget-cn',
-    'initium' => 'https://rsshub.ioiox.com/initium/latest/zh-hans',
-    '21caijing' => 'https://rsshub.app/21caijing/channel/investment',
-    'geekpark' => 'https://rsshub.app/geekpark/breakingnews',
-    '36kr' => 'https://rsshub.app/36kr/news/latest'
+    'sspai' => 'http://sspai.com/feed', //少数派
+    'people_world' => 'http://www.people.com.cn/rss/world.xml', //人民网国际新闻
+    'geekpark' => 'http://mainssl.geekpark.net/rss.rss', //极客公园
+    '36kr' => 'https://www.36kr.com/feed', //36氪
+    'ithome' => 'https://www.ithome.com/rss/', //IT之家
+    'chuapp' => 'http://www.chuapp.com/feed', //触乐
+    //'feng' => 'https://www.feng.com/rss.xml', //威锋网
+    '199it' => 'https://www.199it.com/feed', //199IT
+    'cnbeta' => 'https://www.cnbeta.com/backend.php', //cnBeta
+    'sinafinance' => 'https://rsshub.app/sina/finance',
+    'eastday' => 'https://rsshub.app/eastday/sh',
+    'engadget' => 'https://rsshub.app/engadget-cn'
 );
