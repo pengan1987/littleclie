@@ -33,7 +33,12 @@ $rss = Feed::loadRss($rssUrlInt);
 $rssTitle = mb_convert_encoding($rss->title, 'gbk', 'UTF-8');
 $items = $rss->item;
 ?>
-
+<html>
+	<head>
+		<title><?php echo $rssTitle ?></title>
+		<META http-equiv="Content-Type" content="text/html; charset=gb2312"> 
+	</head>
+	<body>
 <?php if ($page < 0) : ?>
 	<h4><?php echo $rssTitle ?></h4>
 	<?php for ($i = 0; $i < sizeof($items); $i++) : ?>
@@ -53,3 +58,5 @@ $items = $rss->item;
 	<h4><?php echo $itemTitle ?></h4>
 	<?php echo $itemDescription; ?>
 <?php endif ?>
+</body>
+</html>
