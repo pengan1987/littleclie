@@ -1,6 +1,7 @@
 <?php
 require_once 'lib/Feed.php';
 require_once 'repos.php';
+require_once 'lib/utils.php';
 
 if (!ini_get('date.timezone')) {
 	date_default_timezone_set('Asia/Shanghai');
@@ -71,7 +72,8 @@ $items = $rss->item;
 		<?php
 		$item = $items[$page];
 		$itemTitle = mb_convert_encoding($item->title, 'gbk', 'UTF-8');
-		$itemDescription = mb_convert_encoding($item->description, 'gbk', 'UTF-8');
+		$itemDescription = convert_img_to_a($item->description);
+		$itemDescription = mb_convert_encoding($itemDescription, 'gbk', 'UTF-8');
 		?>
 		<h4><?php echo $itemTitle ?></h4>
 		<?php echo $itemDescription; ?>
