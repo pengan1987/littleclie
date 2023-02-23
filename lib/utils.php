@@ -113,3 +113,24 @@ function convert_img_to_a($content)
     }
     return $content;
 }
+
+function convert_img_to_text($content)
+{
+
+    preg_match_all("/<img[^>]+\>/i", $content, $matches);
+    $img_tags = $matches[0];
+
+    // Loop through each <img> tag
+    foreach ($img_tags as $img_tag) {
+        // Extract the src attribute from the <img> tag
+        preg_match("/src=[\"'](.*?)[\"']/", $img_tag, $src_matches);
+        $src = $src_matches[1];
+
+        // Download the image
+        $link = '图片：' . $src . "\r\n";
+
+        // Replace the src attribute in the <img> tag with the local path
+        $content = str_replace($img_tag, $link, $content);
+    }
+    return $content;
+}
